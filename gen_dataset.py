@@ -16,12 +16,10 @@ performance = []
 for a, s, ass, inte in zip(attendance, study_hours, assignments, internals):
     score = (0.3*a) + (1.5*s) + (3*ass) + (2*inte)
 
-    if score > 190:
-        performance.append("High")
-    elif score > 120:
-        performance.append("Medium")
+    if score > 155:
+        performance.append("Pass")
     else:
-        performance.append("Low")
+        performance.append("Fail")
 
 df = pd.DataFrame({
     "attendance": attendance,

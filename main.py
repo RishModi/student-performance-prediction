@@ -10,4 +10,4 @@ train_models(X_train, X_test, y_train, y_test)
 # Example prediction
 new_student_data= [67,16,5,39,1]  # Example feature values
 prediction= predict(new_student_data)
-print(f"Predicted Performance: {prediction}")
+print(f"Pass: {prediction['Pass']}% | Fail: {prediction['Fail']}%")
