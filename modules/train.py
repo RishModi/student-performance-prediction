@@ -5,11 +5,13 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
 def train_models(X_train, X_test, y_train, y_test):
     models = {
         "Logistic Regression": LogisticRegression(max_iter=500),
         "Decision Tree": DecisionTreeClassifier(),
-        "Random Forest": RandomForestClassifier()
+        "Random Forest": RandomForestClassifier(random_state=42)
     }
 
     best_model = None
@@ -29,7 +31,7 @@ def train_models(X_train, X_test, y_train, y_test):
             best_model = model
             best_name = name
 
-    print(f"Best Model: {best_name} with Accuracy: {best_acc * 100:.2f}%")
+    print(f"\nBest Model: {best_name} with Accuracy: {best_acc * 100:.2f}%")
 
     # FORCE REAL SAVE DIRECTORY
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +43,7 @@ def train_models(X_train, X_test, y_train, y_test):
     joblib.dump(best_model, save_path)
     print("MODEL SAVED TO:", save_path)
 
-    print("Classification Report:")
-    print(classification_report(y_test, best_model.predict(X_test)))
+    print("\nClassification Report:")
+    print(classification_report(y_test, best_model.predict(X_test), target_names=['Fail', 'Pass']))
     print("Confusion Matrix:")
     print(confusion_matrix(y_test, best_model.predict(X_test)))
